@@ -1,5 +1,5 @@
 README.txt
-
+ 
 
 TABLE OF CONTENTS
   (1) python-ws.py - Python module that listens to the endpoint and receives the initial requests, converting the JSON data into DataFrame format and 
