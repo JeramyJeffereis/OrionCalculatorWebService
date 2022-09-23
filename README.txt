@@ -1,8 +1,7 @@
 README.txt
  
 
-       TABLE OF CONTENTS
-       
+TABLE OF CONTENTS      
 (1) python-ws.py - Python module that listens to the endpoint and receives the initial requests, converting the JSON data into DataFrame format and passing it to the processing module. Eventually, it receives the results from the processing module and passes it back to the API client.
 
 (2) myprocessor.py - Receives the data and performs the operation requested on the set of rational numbers provided.
@@ -10,7 +9,7 @@ README.txt
 (3) Dockerfile - Dockerfile to define the container that will hold the web service
 
 
-    ABOUT THE PROJECT
+ABOUT THE PROJECT
     This is a RESTful web service built to add, subtract, multiply, and divide up to five rational numbers. Per the clarification provided, the service can only perform one operation at a time and the operation works with the numbers in the order they are provided. 
 
 
@@ -23,7 +22,7 @@ BUILT WITH
    (3) ngrok - Reverse Proxy Service
 
 
-   USAGE DIRECTIONS FOR CLIENT
+USAGE DIRECTIONS FOR CLIENT
    When the server is set up, it is automatically set to run on the machines localhost IP address and port 4102. The port number can be changed by altering the settings in the source code/commands (see install.txt for more on this). The reverse proxy service ngrok is then used to tunnel this IP address and port number to a publicly available domain name. Due to the limited capabilities of the free version for most reverse proxy services, the aforementioned domain name will change whenever the ngrok session for the web service is restarted (see Disclaimer section for more on this). As a result, after ensuring that ngrok is running on the correct port, you must also ensure that you have the correct domain name for the current session. Once you have this, all you'll need to do is add '/process' to the end and you'll have your REST API Endpoint which should look something like this:
 
     'https://2ace-2600-1702-1650-1020-4d06-f831-ee7e-f7fd.ngrok.io/process'. 
@@ -31,7 +30,7 @@ BUILT WITH
     From there, this endpoint will accept a POST request and the POST data. The POST data is given in JSON form and follows the specifications given below. The endpoint does not need any custom headers, although the standard "Content-type: application/json" should be given if it is not already in order to ensure the correct format.
 
 
-   INPUT FORMAT
+INPUT FORMAT
    The input should be in JSON format and contain the following three keys:
    
 (1) "nums"   - A list of up to 5 rational numbers. These numbers can be any combination of integers, decimals and fractions and can be passed interchangeably. The integers and decimals provided can also be formatted interchangeably as either a number or string, while the fractions must be provided as a string.
@@ -54,7 +53,7 @@ Altogether, the JSON input with the aforementioned three keys should look someth
          }
 
 
-    EXAMPLES
+EXAMPLES
      Example 1: Multiplication with interchangeable string and number formatted integers, fractions and decimals.
       Input:
         {
