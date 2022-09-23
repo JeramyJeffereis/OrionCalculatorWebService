@@ -1,0 +1,74 @@
+install.txt
+
+
+Setting Up The Web Service
+   To set up the web service please follow the following directions:
+       (1) Ensure that your firewall is disabled and that your port of choice is open. 
+            - Alternatively, if you cannot fully disable your firewall for whatever reason, be it security or otherwise, 
+            please ensure that the port you want to use is opened
+
+            - You can check if a port is open on a given ip address using the following command where the x's represent the IP address and 53 is the port number.
+            		'nc -vnzu x.x.x.x 53' 
+            If a port is occupied and you want to open it, you can use the 'pfctl' command to do so. These operations should be run in the command line and work on Mac or Linux.
+
+       (2) Set up Docker and download Docker Hub.
+            - We will use Docker for our web service images and containers.
+            - You can download docker from their website: https://www.docker.com/
+            - Once you've downloaded Docker, set up your account and login.
+       
+       (3) Download Python (version 3.6 or newer).
+       		- You can download Python from the following link:
+       		- Ensure that your Python download is at least version 3.6 to prevent any potential compatability issues with the source code
+
+       (4) Install ngrok package and Python packages.
+           - You can install ngrok from the command line on Mac or Linux with the following command:   
+                    brew install --cask ngrok/ngrok/ngrok
+           - Once installed, you can unzip the download from the command line using the following Mac and Linux command(s):
+           			Mac:     sudo unzip ~/Downloads/ngrok-v3-stable-darwin-arm64.zip -d /usr/local/bin
+           			Linux:   sudo unzip ~/Downloads/ngrok-v3-stable-darwin-amd64.zip -d /usr/local/bin
+           - Use the following commands to install the neccessary Python packages:
+           			pip install pandas
+           			pip install CherryPy
+
+       (5) Connect ngrok install to your ngok account with auth-token.
+           - After ngrok has been set up you'll need to connect your install to your account in order to use the full breadth of it's free services
+           - To do this, log in to your account and locate you auth-token, then run the following from the command line on Mac:
+           			ngrok config add-authtoken <your_authtoken>
+
+
+ 	   (6) Run ngrok on the public IP address of your local machine with your chosen port number.
+ 	       - To begin running ngrok perform the following command on the command line in Mac:
+ 	       			ngrok http <your_ip>:<your_port>
+
+
+       (7) Clone the git repository for the project.
+           - To do this run the following command on the command line in Mac:
+           			git clone https://github.com/JeramyJeffereis/OrionProject.git
+
+       (8) Edit the Dockerfile and calculator-ws.py to reflect the port number you wish to use.
+       	   - Before building the Docker image ensure that the correct port number has been set in the following areas of the source files:
+       	   			Dockerfile       - On line 6 where it says "EXPOSE 4102", replace 4102 with your port of choice.
+       	   			calculator-ws.py - On line 55 where it says "'server.socket_port':4102", replace 4102 with your port of choice (the port number cannot be entered as a string).
+
+       (9) Use the Dockerfile to build Docker image.
+       	   - Once the Dockerfile has been created we can use it to create the docker image.
+       	   - To do this, first navigate into the folder from the command line (you can use 'cd' on Mac or Linux) where the Dockerfile and the rest of the source files are located.
+       	   - Once there, run the following command to create the Docker image.
+       	   			docker build -t orion-calc-ws .
+
+       (10) Create and run container using Docker image.
+           - Once we have the Docker image we can use it to create and run a container for the web service.
+           - To do this run the following command:
+           			docker run -p <your_port>:<your_port> orion-calc-ws
+
+       (11) Test it out!
+           - With the container up and running the web service is now ready to use.
+           - Please refer to the README document for usage direction for the API client.
+
+
+
+Guidance for Updates
+    If you've already created the Docker image and you want to go back and make updates to the source files you can actually do so fairly easily with the following steps. First, make sure you've made any changes you wanted to make to the respective source files and saved them. Next, delete any containers associated with the given Docker image (you shouldn't need to fully delete the Docker image itself). Finally, run the same command from line 9 used to initially create the Docker image. Once this has been done all changes made to the source files should be reflected in the Docker image.
+
+
+
